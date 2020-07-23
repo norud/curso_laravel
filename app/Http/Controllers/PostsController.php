@@ -19,6 +19,11 @@ public function contact()
 {
     return view('contact');
 }
+public function show_posts($id, $name, $tk)
+{
+    //return view('post')->with('id', $id);
+    return view('post', compact('id', 'name', 'tk'));
+}
     /**
      * Show the form for creating a new resource.
      *

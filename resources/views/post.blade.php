@@ -8,10 +8,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Contact!</title>
+    <title>Posts!</title>
   </head>
   <body>
-    <h1>Contact!</h1>
+  <h1>Post {{$id}}<br>
+Nombre: {{$name}}
+TK: {{$tk}}
+</h1>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -25,5 +25,7 @@ return 'Example url long'. route('admin.home');
 //Route::get('post/{p}', 'PostsController@index');
 
 //routa que proporciona los metodos del crud
-Route::resource('post', 'PostsController');
+//Route::resource('post', 'PostsController');
 Route::get('contact', 'PostsController@contact');
+
+Route::get('post/{id}/{name}/{tk}', 'PostsController@show_posts');
