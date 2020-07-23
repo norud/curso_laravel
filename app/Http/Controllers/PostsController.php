@@ -15,7 +15,10 @@ class PostsController extends Controller
     {
         return 'Idex method ->';
     }
-
+public function contact()
+{
+    return view('contact');
+}
     /**
      * Show the form for creating a new resource.
      *
