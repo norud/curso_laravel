@@ -68,4 +68,9 @@ class User extends Authenticatable
         # code...
         return $this->morphMany('App\Photo', 'imageable');
     }
+    //one to many
+    public function newsUser()
+    {
+        return $this->hasMany('App\News');
+    }
 }

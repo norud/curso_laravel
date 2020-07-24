@@ -1,6 +1,7 @@
 <?php
 
 use App\Country;
+use App\News;
 use App\Photo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -228,6 +229,7 @@ Route::get('post/tag', function(){
     }
 });
 */
+/*
 Route::get('tags/post', function(){
     $tag = Tag::find(2);
     foreach($tag->posts as $p){
@@ -235,6 +237,41 @@ Route::get('tags/post', function(){
 
     }
 });
+*/
+//one to many crud
+/*
+Route::get('create', function(){
+    $user = User::findOrFail(1);
+    $user->newsUser()->save(new News([
+        'name' => 'Notica alerta covid19'
+    ]));
+
+});*/
+//
+/*
+Route::get('read', function(){
+    $user = User::findOrFail(1);
+    foreach($user->newsUser as $p){
+        echo $p->name;
+    }
+    //dd($user->newsUser);
+});
+*/
+/*
+Route::get('update', function(){
+    $user = User::findOrFail(1);
+    $user->newsUser()->whereId(1)->update([
+        'name' => 'Update news'
+    ]);
+
+});
+*/
+Route::get('delete', function(){
+    $user = User::find(1);
+    $user->newsUser()->whereId(1)->delete();
+
+});
+
 
 
 Route::get('/', function () {
