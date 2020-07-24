@@ -1,5 +1,6 @@
 <?php
 
+use App\Address;
 use App\Country;
 use App\Photo;
 use Illuminate\Support\Facades\DB;
@@ -228,12 +229,45 @@ Route::get('post/tag', function(){
     }
 });
 */
+/*
 Route::get('tags/post', function(){
     $tag = Tag::find(2);
     foreach($tag->posts as $p){
         echo $p->title;
 
     }
+});
+*/
+//one to one
+/*
+Route::get('insert', function(){
+    $user = User::find(1);
+    $address = new Address([
+        'address' => 'Home Creeck limon'
+    ]);
+    $user->address()->save($address);
+
+});
+*/
+/*
+Route::get('update', function(){
+   $address = Address::where('user_id', 1)->first();
+   $address->address = 'new address direcction';
+
+   $address->save();
+
+
+});
+*/
+/*
+Route::get('read', function(){
+    $user = User::findOrFail(1);
+    return $user->address->address;
+});
+*/
+Route::get('deleted', function(){
+    $user = User::findOrFail(1);
+    return $user->address()->delete();
 });
 
 
