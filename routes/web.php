@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Post;
 use App\Tag;
+use App\Task;
 use App\User;
 
 //Eloquente ORM
@@ -266,11 +267,49 @@ Route::get('update', function(){
 
 });
 */
+/*
 Route::get('delete', function(){
     $user = User::find(1);
     $user->newsUser()->whereId(1)->delete();
 
 });
+*/
+
+//one to many crud
+/*
+Route::get('create', function(){
+    $user = User::findOrFail(1);
+
+    $task = new Task([
+        'title' => 'Task 1',
+        'body' => 'just working'
+    ]);
+    $user->tasks()->save($task);
+});
+*/
+/*
+Route::get('read', function(){
+    $user = User::findOrFail(1);
+    foreach($user->tasks as $t){
+        echo $t->title.'<br>';
+
+    }
+});
+*/
+/*
+Route::get('update', function(){
+    $user = User::findOrFail(1);
+    $user->tasks()->whereId(1)->update([
+        'title' => 'Update task 1 from eoute'
+    ]);
+});
+*/
+Route::get('delete', function(){
+    $user = User::findOrFail(1);
+    $user->tasks()->whereId(1)->delete();
+});
+
+
 
 
 

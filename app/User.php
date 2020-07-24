@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\News');
     }
+    //one to many crud
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
 }
