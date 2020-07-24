@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Post;
 use App\Role;
+use App\Staff;
 use App\Tag;
 use App\Task;
 use App\User;
@@ -355,6 +356,7 @@ Route::get('delete', function(){
     }
 });
 */
+/*
 Route::get('attach', function(){
 
     $user = User::findOrFail(1);
@@ -370,6 +372,60 @@ Route::get('sync', function(){
     $user = User::findOrFail(1);
     $user->roles()->sync([2,3]);
 });
+*/
+//polymorphic ralationship CRUDE
+/*
+Route::get('create', function(){
+    $staff = Staff::find(1);
+    return $staff->photos()->create(['path' => 'santos.jgp']);
+});
+*/
+/*
+Route::get('read', function(){
+    $staff = Staff::findOrFail(1);
+    foreach($staff->photos as $p){
+       return $p->path;
+    }
+});
+
+*/
+/*
+Route::get('update', function(){
+    $staff = Staff::findOrFail(1);
+    $photo = $staff->photos()->whereId(5)->first();
+    $photo->path = 'update_picture.jpg';
+    $photo->save();
+
+});
+*/
+//
+/*
+Route::get('delete', function(){
+    return Staff::findOrFail(1)->photos()->whereId(5)->delete();
+
+});
+Route::get('read', function(){
+});
+*/
+/*
+Route::get('assign', function(){
+    $staff = Staff::findOrFail(2);
+    $photo = Photo::findOrFail(6);
+
+    $staff->photos()->save($photo);
+
+});
+*/
+/*
+Route::get('un_assign', function(){
+    $staff = Staff::findOrFail(2);
+    $staff->photos()->whereId(6)->update([
+      'imageable_id' => 0,
+      'imageable_type' => ''
+    ]);
+});
+*/
+
 
 
 
