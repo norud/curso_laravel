@@ -11,6 +11,22 @@ class Post extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'title', 'content'
+        'user_id','title', 'content'
     ];
+    //inverse for relationship one to one
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function photos()
+    {
+        # code...
+        return $this->morphMany('App\Photo', 'imageable');
+    }
+    //polimorphic relation many to many
+    public function tags()
+    {
+        return $this->morphToMany('App\Tag', 'taggable');
+    }
 }

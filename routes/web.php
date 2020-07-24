@@ -1,5 +1,7 @@
 <?php
 
+use App\Country;
+use App\Photo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Post;
+use App\Tag;
+use App\User;
+
 //Eloquente ORM
 /*Route::get('find', function(){
 
@@ -45,8 +50,13 @@ Route::get('findmore', function(){
 //insertar y guardar
 Route::get('basicinsert', function(){
     $p = new Post;
-    $p->title = ' New Insert';
-    $p->content = ' New insert content';
+    $p->user_id = 1;
+    //$p->title = ' New Insert';
+    //$p->content = ' New insert content';
+    $p->title = 'Una empresa israelí crea una prueba que detecta el coronavirus en 30 segundos';
+    $p->content = 'Una foto muestra con punzante claridad las diferencias en el combate al covid-19 que se da en dos países vecinos, Estados Unidos y Canadá, con una icónica maravilla natural como telón de fondo.
+
+    Acercarse en bote a las Cataratas del Niágara es una experiencia muy gustada por los turistas, y tanto en el lado canadiense como en el estadounidense empresas operan barcos para ese fin. La pandemia de covid-19 ciertamente ha afectado severamente a esa actividad, pero una vez que ha comenzado la reapertura de negocios en ambos países, esos navíos han levado anclas de nuevo y llevan turistas a contemplar el poder y la belleza de la caída de las aguas del Niágara.';
     $p->save();
     return $p;
 });
@@ -122,6 +132,108 @@ Route::get('restore', function(){
 //deleting data permanently
 Route::get('deleteper', function(){
     return Post::withTrashed()->where('id', 8)->forceDelete();
+});
+
+//ElOQUENT Relationship
+/*
+Route::get('user/{id}/post', function($id){
+    //if is just one to one we can call the method without ()
+    //return User::find($id)->post; no ->post()
+    return User::find($id)->post->title;
+});
+*/
+/*
+//inverse
+Route::get('post/{id}/user', function($id){
+    return Post::find($id)->user->name;
+
+});
+*/
+/*
+//one to many
+Route::get('posts', function(){
+    $users = User::find(1);
+    foreach($users->posts as $p){
+        echo $p->title.'<br>';
+    }
+
+});*/
+/*
+//manytomany
+Route::get('user/{id}/role', function($id){
+    /*$users = User::find($id);
+    foreach($users->roles as $r){
+        echo $r->name;
+
+    }*/
+    //other option
+    //return User::find($id)->roles()->orderBy('id', 'desc')->get();
+/*
+});
+*/
+
+//accessing the intermediate table pivot
+/*Route::get('user/pivot', function(){
+    $user = User::find(1);
+    foreach($user->roles as $r){
+        echo $r->pivot->created_at;
+    }
+
+});
+*/
+/*
+Route::get('user/country', function(){
+    //
+    $cont = Country::find(4);
+    foreach($cont->posts as $p){
+        echo $p->title;
+    }
+});
+*/
+
+//polymorphic relation
+/*
+Route::get('poly/user', function(){
+
+    $user = User::find(2);
+    foreach($user->photos as $p){
+        echo $p->path;
+
+    }
+});
+Route::get('poly/{id}/post', function($id){
+
+    $post = Post::find($id);
+    foreach($post->photos as $p){
+        echo $p->path.'<br>';
+
+    }
+});
+*/
+/*
+//return the owner of the photos
+Route::get('photo/{id}', function($id){
+    $photo = Photo::findOrFail($id);
+
+    return $photo->imageable;
+
+});
+*/
+//polymorphic many to many
+/*
+Route::get('post/tag', function(){
+    $post = Post::find(1);
+    foreach($post->tags as $t){
+        echo $t->name;
+    }
+});
+*/
+Route::get('tags/post', function(){
+    $tag = Tag::find(2);
+    foreach($tag->posts as $p){
+        echo $p->title;
+
+    }
 });
 
 

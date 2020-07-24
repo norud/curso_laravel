@@ -36,4 +36,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    //one to one relationship
+    public function post()
+    {
+        //if the user id is differet to user_id most writte how you call id_user_post
+        //return $this->hasOne('App\Post', 'id_user_post);
+        return $this->hasOne('App\Post');
+    }
+    //has many
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+    //pivot table user for roles
+    public function roles()
+    {
+        //if we use different connection laravel. we can pass the second parameter table name and pass
+        //the ids
+        return $this->belongsToMany('App\Role')->withPivot('created_at');
+    }
+    //her user can have photos searching at column imageable_id, in that column
+    //alway be asociate with the primary keys table related
+    //imageable_type that column indicate which model
+    //exaamples:
+    /**
+     * imageable_id(the value is the user id), imageable_type(the value is App\User)
+     * imageable_id(the value is the posts id), imageable_type(the value is App\Post)
+     *  */
+    public function photos()
+    {
+        # code...
+        return $this->morphMany('App\Photo', 'imageable');
+    }
 }
