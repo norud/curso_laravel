@@ -13,6 +13,117 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Post;
+//Eloquente ORM
+/*Route::get('find', function(){
+
+$posts = Post::all();
+foreach($posts as $p){
+    echo $p->title.'<br>'.$p->content;
+}
+});*/
+/*
+Route::get('find', function(){
+
+    $posts = Post::find(2);
+        echo $posts->title.'<br>'.$posts->content;
+
+    });
+    */
+/*Route::get('findwhere', function(){
+    $posts = Post::where('id',2)->orderBy('id', 'desc')->take(1)->get();
+    return $posts;
+    // echo $posts->title.'<br>'.$posts->content;
+
+});
+*/
+/*
+Route::get('findmore', function(){
+    return Post::findOrFail(2);
+});*/
+/*
+//insertar y guardar
+Route::get('basicinsert', function(){
+    $p = new Post;
+    $p->title = ' New Insert';
+    $p->content = ' New insert content';
+    $p->save();
+    return $p;
+});
+*/
+//update rows
+/*
+Route::get('update', function(){
+    $p =  Post::find(2);
+    $p->title = 'Update id 2';
+    $p->content = 'Update content for id 2';
+    $p->update();
+    return $p;
+
+});
+*/
+//crear con el model
+/*
+Route::get('create', function(){
+    Post::create(
+        [
+            'title' => 'Title from create method',
+            'content' => 'Content fromcreate method'
+        ]
+    );
+
+});
+*/
+//update with the model
+/*
+Route::get('update', function(){
+    Post::where('id', 2)->where('is_admin', 0)
+    ->update([
+        'title' => 'Updated from route using model',
+        'content' => 'Updated content from route using model'
+    ]);
+});*/
+
+//deleting data
+/*Route::get('delete', function(){
+return Post::find(3)->delete();
+
+});
+*/
+//usign distroy method
+//if we know the id
+/*
+Route::get('delete2', function(){
+    //also we can pass an array
+    //return Post::destroy([3,6]);
+    return Post::destroy(4);
+});
+*/
+/*
+//softdelete
+Route::get('sofdelete', function(){
+    return Post::find(6)->delete();
+});
+
+/*
+//retrieving deleted data
+Route::get('readesoftdelete', function(){
+    //return Post::withTrashed()->where('is_admin', 0)->get();
+    //only trased
+    return Post::onlyTrashed()->where('id', 6)->get();
+});
+*/
+/*
+//restoring trashed data
+Route::get('restore', function(){
+    return Post::withTrashed()->where('is_admin', 0)->restore();
+});
+*/
+//deleting data permanently
+Route::get('deleteper', function(){
+    return Post::withTrashed()->where('id', 8)->forceDelete();
+});
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,6 +171,7 @@ Route::get('insert', function()
 });*/
 
 //eliminar
+/*
 Route::get('eliminar', function(){
     $del = DB::delete('delete from posts where id = ?', [1]);
     if($del){
@@ -67,5 +179,5 @@ Route::get('eliminar', function(){
     }else{
         return 'Error';
     }
-});
+});*/
 
