@@ -53,7 +53,7 @@ class User extends Authenticatable
     {
         //if we use different connection laravel. we can pass the second parameter table name and pass
         //the ids
-        return $this->belongsToMany('App\Role')->withPivot('created_at');
+        return $this->belongsToMany('App\Role');//->withPivot('created_at');
     }
     //her user can have photos searching at column imageable_id, in that column
     //alway be asociate with the primary keys table related

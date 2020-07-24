@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
     //
     //inverse rols to users
     public function users()

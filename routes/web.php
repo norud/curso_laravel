@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Post;
+use App\Role;
 use App\Tag;
 use App\Task;
 use App\User;
@@ -132,10 +133,11 @@ Route::get('restore', function(){
 });
 */
 //deleting data permanently
+/*
 Route::get('deleteper', function(){
     return Post::withTrashed()->where('id', 8)->forceDelete();
 });
-
+*/
 //ElOQUENT Relationship
 /*
 Route::get('user/{id}/post', function($id){
@@ -304,11 +306,70 @@ Route::get('update', function(){
     ]);
 });
 */
+/*
 Route::get('delete', function(){
     $user = User::findOrFail(1);
     $user->tasks()->whereId(1)->delete();
 });
+*/
+//many to many crud
+/*
+Route::get('create', function(){
+    $user = User::find(1);
 
+    $user->roles()->save(new Role([
+        'name' => 'Seller'
+    ]));
+});
+*/
+/*
+Route::get('read', function(){
+    $user = User::find(1);
+foreach($user->roles as $t){
+    echo $t->name.'<br>';
+
+}
+});
+*/
+/*
+Route::get('updater', function(){
+    $user = User::findOrFail(1);
+    if($user->has('roles')){
+        foreach($user->roles as $r){
+            if($r->name == 'adminitrador'){
+                $r->name = 'admin';
+                $r->save();
+            }
+
+        }
+    }else{
+        dd($user->roles);
+    }
+});
+*/
+/*
+Route::get('delete', function(){
+    $user = User::findOrFail(1);
+    foreach($user->roles as $r){
+        $r->whereId(3)->delete();
+    }
+});
+*/
+Route::get('attach', function(){
+
+    $user = User::findOrFail(1);
+    $user->roles()->attach(2);
+});
+Route::get('detach', function(){
+
+    $user = User::findOrFail(1);
+    $user->roles()->detach(2);
+});
+Route::get('sync', function(){
+
+    $user = User::findOrFail(1);
+    $user->roles()->sync([2,3]);
+});
 
 
 
@@ -317,10 +378,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 //route with nickname
+/*
 Route::get('admin/long/urlpos/home', array('as' => 'admin.home', function(){
     echo '<a href="'.route("admin.home").'">click </a>';
 return 'Example url long'. route('admin.home');
 }));
+*/
 //pasar un parametro directo url(get)
 //Route::get('post/{p}', 'PostsController@index');
 
