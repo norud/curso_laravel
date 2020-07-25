@@ -22,6 +22,7 @@ use App\Staff;
 use App\Tag;
 use App\Task;
 use App\User;
+use App\Video;
 
 //Eloquente ORM
 /*Route::get('find', function(){
@@ -404,8 +405,7 @@ Route::get('delete', function(){
     return Staff::findOrFail(1)->photos()->whereId(5)->delete();
 
 });
-Route::get('read', function(){
-});
+
 */
 /*
 Route::get('assign', function(){
@@ -424,10 +424,52 @@ Route::get('un_assign', function(){
       'imageable_type' => ''
     ]);
 });
+Route::get('read', function(){
+});
 */
+/*
+Route::get('create', function(){
+    $post = Post::create([
+        'title'=> 'Inserting post',
+        'content' => 'content for inserting post'
+    ]);
+    $tag = Tag::find(1);
+    //attach
+    $post->tags()->save($tag);
 
+    $tag2 = Tag::find(2);
+    $video = Video::create([
+        'name' => 'insert.mov'
+    ]);
+    $video->tags()->save($tag2);
+});
+*/
+/*
+Route::get('read', function(){
+    $post = Post::findOrFail(1);
+    foreach($post->tags as $t){
+        echo $t->name;
+    }
+});
+*/
+/*
+Route::get('update', function(){
+    $post = Post::find(1);
+    $tag = Tag::find(3);
+    //$post->tags()->save($tag);
+    //return $post->tags()->attach($tag);
 
-
+    $post->tags()->sync([1]);
+});
+*/
+/*
+Route::get('delete', function(){
+    $post = Post::find(1);
+    foreach($post->tags as $t){
+        $t->whereId(3)->delete();
+    }
+});
+*/
 
 
 Route::get('/', function () {
