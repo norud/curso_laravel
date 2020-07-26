@@ -530,3 +530,7 @@ Route::get('eliminar', function(){
     }
 });*/
 
+/**
+ * CRUD APP
+ */
+Route::resource('posts', 'PostsController');

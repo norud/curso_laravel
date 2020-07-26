@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -13,7 +14,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return 'Idex method ->';
+        $posts = Post::all();
+        return view('posts.index', compact('posts'));
     }
 public function contact()
 {
@@ -35,7 +37,7 @@ public function show_posts($id, $name, $tk)
      */
     public function create()
     {
-        //
+        return view("posts.create");
     }
 
     /**
@@ -44,9 +46,16 @@ public function show_posts($id, $name, $tk)
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $r)
     {
-        //
+      /*  Post::create([
+            'title' => $r->title
+        ]);*/
+        $post = new Post;
+        $post->title = $r->title;
+        $post->content = $r->content;
+        $post->save();
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -57,8 +66,9 @@ public function show_posts($id, $name, $tk)
      */
     public function show($id)
     {
+        $post = Post::findOrFail($id);
         //
-        return 'show method->'.$id;
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -69,8 +79,8 @@ public function show_posts($id, $name, $tk)
      */
     public function edit($id)
     {
-        //
-        return 'edit method ->'.$id;
+        $post = Post::findOrFail($id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -80,9 +90,13 @@ public function show_posts($id, $name, $tk)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $r, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->title = $r->title;
+        $post->content = $r->content;
+        $post->update();
+        return redirect()->route('posts.show', $id);
     }
 
     /**
@@ -93,6 +107,8 @@ public function show_posts($id, $name, $tk)
      */
     public function destroy($id)
     {
-        //
+        Post::findOrFail($id)->delete();
+        return redirect('posts');
+
     }
 }
