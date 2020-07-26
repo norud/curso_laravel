@@ -3,12 +3,28 @@
 @section('content')
 <h1>Create Post</h1>
 
-<form method="POST" action="{{route('posts.store')}}">
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $e)
+        <li>{{$e}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+    {!! Form::open(['method' => 'post', 'action' => 'PostsController@store']) !!}
     @csrf
-   <input type="text" name="title" value="" placeholder="enter the title"><br>
-   <textarea name="content" id="" cols="30" rows="3" placeholder="enter content"></textarea>
-   <button class="bt bt-success" type="submit">Create</button>
-</form>
+    <div class="form-group">
+        {!! Form::label('title', 'Title') !!}
+        {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Enter title']) !!}
+    </div>
+   <div class="form-group">
+    {!! Form::label('content', 'Content') !!}
+    {!! Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => 'Enter contet',
+    'rows' => '3']) !!}
+   </div>
+   {!! Form::submit('Create', ['class' => 'bt bt-success']) !!}
+{!! Form::close() !!}
 
 @endsection
 

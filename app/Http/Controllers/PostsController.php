@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostsRequest;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -46,11 +47,17 @@ public function show_posts($id, $name, $tk)
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $r)
+    public function store(CreatePostsRequest $r)
     {
       /*  Post::create([
             'title' => $r->title
-        ]);*/
+      ]);*/
+      //validate
+     /* $this->validate($r, [
+          'title' => 'required|min:3',
+          'content' => 'required'
+      ]);*/
+
         $post = new Post;
         $post->title = $r->title;
         $post->content = $r->content;

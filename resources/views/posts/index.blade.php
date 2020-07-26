@@ -11,11 +11,12 @@
         <a href="{{route('posts.show', $p->id)}}">Show
     </a> -/-
     <a href="{{route('posts.edit', $p->id)}}">Edit</a>
-    <form method="POST" action="{{route('posts.index')}}/{{$p->id}}">
+    {!! Form::open(['method' => 'DELETE', 'action' => ['PostsController@destroy', $p->id]]) !!}
         @csrf
-        <input type="hidden" name="_method" value="DELETE">
-        <button type="submit">Delete</button>
-    </form>
+    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+
+    {!! Form::close() !!}
+
     <br>
 </li>
     @endforeach

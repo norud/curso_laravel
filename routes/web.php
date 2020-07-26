@@ -533,4 +533,7 @@ Route::get('eliminar', function(){
 /**
  * CRUD APP
  */
-Route::resource('posts', 'PostsController');
+Route::group(['middleware' => 'web'], function () {
+    Route::resource('posts', 'PostsController');
+});
+
