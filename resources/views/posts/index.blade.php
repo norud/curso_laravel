@@ -6,7 +6,7 @@
 <ul>
     @foreach ($posts as $p)
     <li>
-
+    <img src="{{$p->path}}" alt="img" width="200" height="200">
         <h3>{{$p->title}}</h3>
         <a href="{{route('posts.show', $p->id)}}">Show
     </a> -/-

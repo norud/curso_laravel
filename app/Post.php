@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
+    public $path = '/imgs/';
     //use softdelete
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'user_id','title', 'content'
+        'user_id','title', 'content', 'path'
     ];
     //inverse for relationship one to one
     public function user()
@@ -35,4 +36,10 @@ class Post extends Model
     {
        return $query->orderBy('id', 'asc')->get();
     }
+public function getPathAttribute($v)
+{
+    return $this->path.$v;
+}
+
+
 }

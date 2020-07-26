@@ -59,12 +59,22 @@ class PostsController extends Controller
           'title' => 'required|min:3',
           'content' => 'required'
       ]);*/
+      $file = $r->file('file');
+      //dd($file);
+      $post = new Post;
 
-        $post = new Post;
-        $post->title = $r->title;
-        $post->content = $r->content;
-        $post->save();
-        return redirect()->route('posts.index');
+        if ($file) {
+            $orName = $file->getClientOriginalName();
+            //$fileZise = $file->getClientSize();
+
+            $file->move('imgs', $orName);
+            $post->path = $orName;
+            $post->title = $r->title;
+            $post->content = $r->content;
+            $post->save();
+            return redirect()->route('posts.index');
+        }
+
     }
 
     /**

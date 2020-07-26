@@ -12,8 +12,9 @@
         </ul>
     </div>
 @endif
-    {!! Form::open(['method' => 'post', 'action' => 'PostsController@store']) !!}
+    {!! Form::open(['method' => 'post', 'action' => 'PostsController@store', 'files' => true]) !!}
     @csrf
+
     <div class="form-group">
         {!! Form::label('title', 'Title') !!}
         {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Enter title']) !!}
@@ -23,6 +24,9 @@
     {!! Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => 'Enter contet',
     'rows' => '3']) !!}
    </div>
+   <div class="form-group">
+    {!! Form::file('file', ['class' => 'form-control']) !!}
+</div>
    {!! Form::submit('Create', ['class' => 'bt bt-success']) !!}
 {!! Form::close() !!}
 
