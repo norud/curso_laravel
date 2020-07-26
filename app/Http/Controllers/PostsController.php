@@ -15,22 +15,24 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::latest();
         return view('posts.index', compact('posts'));
     }
-public function contact()
-{
-    $people = ['Yeral', 'Edwin', 'Gey', 'Ub'];
-    return view('contact',
-compact(
-    'people'
-));
-}
-public function show_posts($id, $name, $tk)
-{
-    //return view('post')->with('id', $id);
-    return view('post', compact('id', 'name', 'tk'));
-}
+    public function contact()
+    {
+        $people = ['Yeral', 'Edwin', 'Gey', 'Ub'];
+        return view(
+            'contact',
+            compact(
+                'people'
+            )
+        );
+    }
+    public function show_posts($id, $name, $tk)
+    {
+        //return view('post')->with('id', $id);
+        return view('post', compact('id', 'name', 'tk'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -49,11 +51,11 @@ public function show_posts($id, $name, $tk)
      */
     public function store(CreatePostsRequest $r)
     {
-      /*  Post::create([
+        /*  Post::create([
             'title' => $r->title
       ]);*/
-      //validate
-     /* $this->validate($r, [
+        //validate
+        /* $this->validate($r, [
           'title' => 'required|min:3',
           'content' => 'required'
       ]);*/
@@ -116,6 +118,5 @@ public function show_posts($id, $name, $tk)
     {
         Post::findOrFail($id)->delete();
         return redirect('posts');
-
     }
 }

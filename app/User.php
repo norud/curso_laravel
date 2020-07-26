@@ -78,4 +78,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Task');
     }
+    public function getNameAttribute($v)
+    {
+        //return ucfirst($v);
+        return strtoupper($v);
+    }
+    //mutator
+    public function setNameAttribute($v)
+    {
+        return $this->attributes['name'] = strtoupper($v);
+    }
 }

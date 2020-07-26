@@ -23,6 +23,7 @@ use App\Tag;
 use App\Task;
 use App\User;
 use App\Video;
+use Carbon\Carbon;
 
 //Eloquente ORM
 /*Route::get('find', function(){
@@ -536,4 +537,20 @@ Route::get('eliminar', function(){
 Route::group(['middleware' => 'web'], function () {
     Route::resource('posts', 'PostsController');
 });
+Route::get('dates', function(){
+    $date = new DateTime('+1 week');
+    echo $date->format('m-d-Y').'<br>';
+    echo Carbon::now()->addDays(10)->diffForHumans();
+    echo '<br>'. Carbon::now()->subMonths(15)->diffForHumans();
+    echo '<br>'.Carbon::now()->yesterday()->diffForHumans();
+});
 
+Route::get('getname', function(){
+    $user = User::find(1);
+    echo $user->name;
+});
+Route::get('setname', function(){
+    $user = User::find(1);
+    $user->name = 'ramon';
+    $user->save();
+});

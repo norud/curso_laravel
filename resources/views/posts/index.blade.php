@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Posts</h1>
+<h1>Posts Order</h1>
 @if ($posts)
 <ul>
     @foreach ($posts as $p)
