@@ -572,6 +572,18 @@ Route::get('/', function () {
         return redirect()->intended('admin');
     }
 */
-Auth::logout();
+//Auth::logout();
 
 });
+
+Route::get('admin/user/roles', ['middleware' => ['role', 'auth', 'web'], function () {
+    return 'Middleware role';
+}]);
+/*
+Route::get('/', function () {
+   $user =  Auth::user();
+   echo ($user->isAdmin()) ? 'Admin User' : 'Not admin';
+
+});
+*/
+Route::get('/admin', 'AdminController@index');
