@@ -24,6 +24,7 @@ use App\Task;
 use App\User;
 use App\Video;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 //Eloquente ORM
 /*Route::get('find', function(){
@@ -534,6 +535,7 @@ Route::get('eliminar', function(){
 /**
  * CRUD APP
  */
+/*
 Route::group(['middleware' => 'web'], function () {
     Route::resource('posts', 'PostsController');
 });
@@ -553,4 +555,23 @@ Route::get('setname', function(){
     $user = User::find(1);
     $user->name = 'ramon';
     $user->save();
+});
+*/
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', function () {
+    /*if(Auth::check()){
+        return "The user is logged in";
+    }  */
+   /* $email = '';
+    $password = '';
+
+    if(Auth::attempt(['email' => $email, 'password' => $password])){
+        return redirect()->intended('admin');
+    }
+*/
+Auth::logout();
+
 });
