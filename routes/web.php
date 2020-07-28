@@ -474,10 +474,10 @@ Route::get('delete', function(){
 });
 */
 
-
-Route::get('/', function () {
+/*
+Route::get('/', 'HomeController@index') {
     return view('welcome');
-});
+});*/
 //route with nickname
 /*
 Route::get('admin/long/urlpos/home', array('as' => 'admin.home', function(){
@@ -558,11 +558,11 @@ Route::get('setname', function(){
     $user->save();
 });
 */
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', function () {
+//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/nada', function () {
     /*if(Auth::check()){
         return "The user is logged in";
     }  */
@@ -576,10 +576,10 @@ Route::get('/', function () {
 //Auth::logout();
 
 });
-
+/*
 Route::get('admin/user/roles', ['middleware' => ['role', 'auth', 'web'], function () {
     return 'Middleware role';
-}]);
+}]);*/
 /*
 Route::get('/', function () {
    $user =  Auth::user();
@@ -587,13 +587,14 @@ Route::get('/', function () {
 
 });
 */
-Route::get('/admin', 'AdminController@index');
+//Route::get('/admin', 'AdminController@index');
 
-Route::get('/', function () {
+/*Route::get('/mail', function () {
     $data =[
         'title' => 'Test mailgun',
         'content' => 'Body content'
     ];
+*/
 //we need to Authorized Recipients to sent
 //example im sending from soporte@linkercr.com to soporte@linkercr.com because is Authorized
 /**
@@ -608,8 +609,12 @@ Route::get('/', function () {
  * If you didn't expect this email, please unsubscribe.
  * href="http://email.mailgun.net/u/eJxtj81uxCAMhJ8mHBExP4YDh9VWOe07VITALuqGoISu1LevI7U9VfJhxjP-JC9-RFY8CBACAUFqVJqP_DpZZya8mhHepJTToMQayvP-WXlNnT38MgeLwgWUJkUjM1h0kK0SqCJGp9juj61te090-iz1I-1x53Fb2Wn8o_d2DPIywEQTWuO_eKrQpqejl3ontadYWkm1H2T-R56E2MsrUAKTxIzOWOnOl0x2gbSBLDJG1HLWVNF5zGoJsw45p6jROWV0WpCi2w-XEbeF-vVew5r837b7AS7fxO9fqQ"
  */
-    Mail::send('emails.test', $data, function($m){
+ /*   Mail::send('emails.test', $data, function($m){
         $m->to('soporte@linkercr.com', 'Yeral')->subject('Test subject mailgun');
     });
 
 });
+*/
+//
+Route::get('/', 'HomeController@index');
+Auth::routes();
