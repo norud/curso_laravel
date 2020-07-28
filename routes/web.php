@@ -25,6 +25,7 @@ use App\User;
 use App\Video;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 //Eloquente ORM
 /*Route::get('find', function(){
@@ -587,3 +588,28 @@ Route::get('/', function () {
 });
 */
 Route::get('/admin', 'AdminController@index');
+
+Route::get('/', function () {
+    $data =[
+        'title' => 'Test mailgun',
+        'content' => 'Body content'
+    ];
+//we need to Authorized Recipients to sent
+//example im sending from soporte@linkercr.com to soporte@linkercr.com because is Authorized
+/**
+ * Hi there,
+ *
+ * Mailgun account "Linkercr" provided your address to test their integration with Mailgun.
+ *
+ * Please click the link below if you agree to receive emails from their account.
+ * link
+ * https://app.mailgun.com/testing/recipients/soporte@linkercr.com/activate/37f79683920076f9a68362f0f7c753b5/5f1f4dab5affec5799465ed7/Linkercr
+ *
+ * If you didn't expect this email, please unsubscribe.
+ * href="http://email.mailgun.net/u/eJxtj81uxCAMhJ8mHBExP4YDh9VWOe07VITALuqGoISu1LevI7U9VfJhxjP-JC9-RFY8CBACAUFqVJqP_DpZZya8mhHepJTToMQayvP-WXlNnT38MgeLwgWUJkUjM1h0kK0SqCJGp9juj61te090-iz1I-1x53Fb2Wn8o_d2DPIywEQTWuO_eKrQpqejl3ontadYWkm1H2T-R56E2MsrUAKTxIzOWOnOl0x2gbSBLDJG1HLWVNF5zGoJsw45p6jROWV0WpCi2w-XEbeF-vVew5r837b7AS7fxO9fqQ"
+ */
+    Mail::send('emails.test', $data, function($m){
+        $m->to('soporte@linkercr.com', 'Yeral')->subject('Test subject mailgun');
+    });
+
+});
