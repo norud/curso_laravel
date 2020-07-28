@@ -587,7 +587,7 @@ Route::get('/', function () {
 
 });
 */
-Route::get('/admin', 'AdminController@index');
+//Route::get('/admin', 'AdminController@index');
 
 Route::get('/', function () {
     $data =[
@@ -611,5 +611,10 @@ Route::get('/', function () {
     Mail::send('emails.test', $data, function($m){
         $m->to('soporte@linkercr.com', 'Yeral')->subject('Test subject mailgun');
     });
+
+});
+///admin tamplete
+Route::get('admin', function () {
+    return view('admin.index');
 
 });
