@@ -44,7 +44,7 @@ class User extends Authenticatable
     {
         return ($this->role->name == 'administrator') ? true : false;
     }
-    /*
+
     //one to one relationship
     public function post()
     {
@@ -57,6 +57,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post');
     }
+    /*
     //pivot table user for roles
     public function roles()
     {
