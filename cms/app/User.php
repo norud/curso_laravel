@@ -40,4 +40,24 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post');
     }
+
+    public function permissions()
+    {
+        return $this->belongsToMany('App\Permission');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+
+    public function userHasRole($role_name)
+    {
+        foreach ($this->roles as $role) {
+            return ($role_name == $role->name)
+            ? true
+            : false;
+        }
+        return false;
+    }
 }
