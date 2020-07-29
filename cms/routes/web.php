@@ -22,16 +22,23 @@ Route::get('post/{post}', 'PostController@show')->name('post');
 
 Route::group(['middleware' => ['auth']], function () {
     //admin
-    Route::get('admin', 'AdminController@index')->name('admin.index');
+    Route::prefix('admin')->group(function () {
 
-    Route::get('admin/posts', 'PostController@index')->name('post.index');
-    Route::get('admin/posts/create', 'PostController@create')->name('post.create');
-    Route::post('admin/posts', 'PostController@store')->name('post.store');
-    Route::get('admin/posts', 'PostController@index')->name('post.index');
+        Route::get('/', 'AdminController@index')->name('admin.index');
 
-    Route::get('admin/posts/{post}/edit', 'PostController@edit')->name('post.edit');
-    Route::delete('admin/posts/{post}/delete', 'PostController@destroy')->name('post.destroy');
-    Route::patch('admin/posts/{post}/update', 'PostController@update')->name('post.update');
+        Route::get('posts', 'PostController@index')->name('post.index');
+        Route::get('posts/create', 'PostController@create')->name('post.create');
+        Route::post('posts', 'PostController@store')->name('post.store');
+        Route::get('posts', 'PostController@index')->name('post.index');
+
+        Route::get('posts/{post}/edit', 'PostController@edit')->name('post.edit');
+        Route::delete('posts/{post}/delete', 'PostController@destroy')->name('post.destroy');
+        Route::patch('posts/{post}/update', 'PostController@update')->name('post.update');
+
+        //users
+        Route::get('users/{user}/profile', 'UserController@show')->name('user.show');
+        Route::put('users/{user}/update', 'UserController@update')->name('user.update');
+    });
 });
 //using policy as middleware
 //Route::get('admin/posts/{post}/edit', 'PostController@edit')->middleware('can:view, post')->name('post.edit');
