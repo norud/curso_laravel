@@ -17,6 +17,8 @@ Route::group(['middleware' => ['role:admin,', 'auth']], function () {
         //users
         Route::get('users', 'UserController@index')->name('user.index');
         Route::get('users/{user}/profile', 'UserController@show')->name('user.show');
+        Route::put('users/{user}/attach', 'UserController@attach')->name('user.role.attach');
+        Route::put('users/{user}/detach', 'UserController@detach')->name('user.role.detach');
 });
 
 Route::group(['middleware' => ['auth', 'can:view,user']], function () {

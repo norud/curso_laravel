@@ -56,7 +56,7 @@
                 <td><img class="img-profile rounded" style="
                     height: 80px;
                 " src="{{$user->avatar}}"></td>
-                <td>{{$user->username}}</td>
+                <td><a class="dropdown-item" href="{{route('user.show', $user)}}">{{$user->username}}</a></td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->created_at->diffForHumans()}}</td>
