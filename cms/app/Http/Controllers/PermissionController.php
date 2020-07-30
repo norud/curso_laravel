@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PermissionController extends Controller
 {
@@ -14,7 +15,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.permissions.index', ['permissions' => Permission::all()]);
     }
 
     /**
@@ -33,9 +34,18 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        request()->validate([
+            'name' => 'required|min:3'
+        ]);
+        Permission::create([
+            'name' => Str::ucfirst(request('name')),
+            'slug' => Str::slug(request('name'), '-')
+        ]);
+        request()->session()->flash('success', 'The permission mame: ' . request('name') . ' was create');
+        return back();
+
     }
 
     /**
@@ -57,7 +67,9 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        //
+        return view('admin.permissions.edit',[
+            'permission' => $permission
+        ]);
     }
 
     /**
@@ -67,9 +79,23 @@ class PermissionController extends Controller
      * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission)
+    public function update(Permission $permission)
     {
-        //
+        request()->validate([
+            'name' => 'required|min:3'
+        ]);
+        $permission->name = Str::ucfirst(request('name'));
+        $permission->slug = Str::slug(request('name'), '-');
+        //isDirty() detect has changes
+        //isClean() is nathing change
+        if ($permission->isDirty('name')) {
+
+            $permission->save();
+            request()->session()->flash('success', 'The permission name: ' . $permission->name . ' was updated');
+        }else{
+            request()->session()->flash('success', 'Nothing  has been updated');
+        }
+        return back();
     }
 
     /**
@@ -80,6 +106,8 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        request()->session()->flash('message', 'The permission name: ' . $permission->name . ' was deleted');
+        return back();
     }
 }

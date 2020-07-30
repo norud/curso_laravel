@@ -59,6 +59,7 @@
     @if(auth()->user()->userHasRole('Admin'))
 <!--link to user controller-->
 <x-admin.sidebar.admin-sidebar-users-links></x-admin.sidebar.admin-sidebar-user-links>
+    <x-admin.sidebar.autorization-links></x-admin.sidebar.autorization-links>
 @endif
 
 
