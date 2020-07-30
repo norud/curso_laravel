@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -44,7 +45,9 @@ class User extends Authenticatable
     }
 
     public function getAvatarAttribute($v){
-        return asset('storage/'.$v);
+        return (Str::contains($v, '.com'))
+        ? $v
+        : asset('storage/'.$v);
     }
 
     public function posts()
@@ -65,7 +68,7 @@ class User extends Authenticatable
     public function userHasRole($role_name)
     {
         foreach ($this->roles as $role) {
-            return ($role_name == $role->name)
+            return (Str::lower($role_name) == Str::lower($role->name))
             ? true
             : false;
         }
