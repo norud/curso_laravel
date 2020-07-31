@@ -37,5 +37,9 @@ Route::group(['middleware' => 'admin'], function () {
     //categories
     Route::resource('admin/categories', 'AdminCategoryController');
 
+    //media
+    Route::resource('admin/midia', 'AdminMediaController');
+    //Route::get('admin/media/upload', ['as' => 'admin.media.upload'],'AdminCategoryController@');
+
 });
 

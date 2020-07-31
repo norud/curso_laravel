@@ -52,7 +52,7 @@ class AdminUserController extends Controller
         $inputs = $request->all();
         if ($file = $request->file('photo_id')) {
             $nameFile = time() . $file->getClientOriginalName();
-            $file->move('imgs/users', $nameFile);
+            $file->move('imgs', $nameFile);
             //first create phto
             $photo = Photo::create(['file' => $nameFile]);
             //we get the photo id
@@ -112,7 +112,7 @@ class AdminUserController extends Controller
 
        if($file = $request->file('photo_id')){
            $nameFile = time().$file->getClientOriginalName();
-           $file->move('imgs/users', $nameFile);
+           $file->move('imgs', $nameFile);
 
            $photo = Photo::create(['file' => $nameFile]);
            $inputs['photo_id'] = $photo->id;
