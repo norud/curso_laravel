@@ -34,7 +34,7 @@ class AdminUserController extends Controller
     {
         //lists() make an array, we pass to the view
         //the oreder of culumn has to be first the name after the id
-        $roles = Role::lists('name', 'id')->all();
+        $roles = Role::pluck('name', 'id')->all();
         return view('admin.users.create', compact('roles'));
     }
 
@@ -85,7 +85,7 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::lists('name', 'id')->all();
+        $roles = Role::pluck('name', 'id')->all();
         return view('admin.users.edit', compact('user', 'roles'));
     }
 

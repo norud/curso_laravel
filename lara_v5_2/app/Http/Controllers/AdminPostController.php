@@ -38,7 +38,7 @@ public function post($slug)
      */
     public function create()
     {
-        $categories = Category::lists('name','id')->all();
+        $categories = Category::pluck('name','id')->all();
         return view('admin.posts.create', compact('categories'));
     }
 
@@ -50,6 +50,7 @@ public function post($slug)
      */
     public function store(PostsCreateRequest $request)
     {
+
         $input = $request->all();
         $user = Auth::user();
 
@@ -89,7 +90,7 @@ public function post($slug)
     {
         return view('admin.posts.edit', [
             'post'=> Post::findOrFail($id),
-            'categories' => Category::lists('name','id')->all()]);
+            'categories' => Category::pluck('name','id')->all()]);
     }
 
     /**

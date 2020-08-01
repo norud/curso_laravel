@@ -30,7 +30,7 @@
                 @foreach ($users as $user)
                 <tr>
                     <th scope="row">{{$user->id}}</th>
-                    <th ><img height="45" src="{{$user->photo ? $user->photo->file : 'http://placehold.it/400x400'}}" alt="IMG" >
+                    <th ><img height="45" src="{{$user->photo ? asset($user->photo->file) : 'http://placehold.it/400x400'}}" alt="IMG" >
                         </th>
                     <td><a href="{{route('admin.users.edit', $user)}}">{{$user->name}} </a></td>
                     <td> {{$user->email}}</td>

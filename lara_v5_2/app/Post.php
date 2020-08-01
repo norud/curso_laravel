@@ -1,20 +1,16 @@
 <?php
 
 namespace App;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
-
-class Post extends Model implements SluggableInterface
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+class Post extends Model //implements SluggableInterface
 {
-    //is not working
-    use SluggableTrait;
 
-    protected $sluggable = [
-        'build_from' => 'title',
-        'save_to'    => 'slug',
-        'on_update'  => true,
-    ];
+    use Sluggable;
+    use SluggableScopeHelpers;
+
+
     protected $fillable = [
         'user_id',
         'category_id',
@@ -24,7 +20,14 @@ class Post extends Model implements SluggableInterface
         'slug'
     ];
 
-
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
     public function photo()
     {
         return $this->belongsTo('App\Photo');

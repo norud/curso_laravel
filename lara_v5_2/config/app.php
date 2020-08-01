@@ -157,7 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         //add
         Collective\Html\HtmlServiceProvider::class,
-        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
 
     ],
 
