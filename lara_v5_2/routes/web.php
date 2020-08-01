@@ -20,9 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index');
 
-Route::get('admin', function () {
-    return view('admin.index');
-});
+Route::get('admin', 'AdminController@index');
 
 
 Route::get('/home', 'HomeController@index');
@@ -69,7 +67,8 @@ Route::group(['middleware' => 'admin'], function () {
         'index'=>'admin.comments.index',
         'create'=>'admin.comments.create',
         'store'=>'admin.comments.store',
-        'edit'=>'admin.comments.edit'
+        'edit'=>'admin.comments.edit',
+        'show' => 'admin.comments.replies.show'
     ]]);
     Route::resource('admin/comments/replies', 'CommentReplyController',['names'=>[
         'index'=>'admin.replies.index',

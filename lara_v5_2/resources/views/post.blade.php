@@ -23,7 +23,7 @@
 <hr>
 
 <!-- Preview Image -->
-<img class="img-fluid rounded" src="{{asset($post->photo->file)}}" alt="">
+<img class="img-fluid rounded" src="{{$post->photo ? asset($post->photo->file) : 'http://placehold.it/400x400'}}" alt="">
 
 <hr>
 @if(Auth::check())

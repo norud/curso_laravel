@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Post;
-use Illuminate\Support\Facades\Auth;
-
-class PostCommentController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +16,11 @@ class PostCommentController extends Controller
      */
     public function index()
     {
-        return view('admin.comments.index',
-    ['comments' => Comment::all()]);
+        $postCount = Post::count();
+        $categoriesCount = Category::count();
+        $commentsCount = Comment::count();
+        return view('admin.index', compact(
+            'postCount', 'categoriesCount', 'commentsCount'));
     }
 
     /**
@@ -40,21 +41,7 @@ class PostCommentController extends Controller
      */
     public function store(Request $request)
     {
-
-        $user = Auth::user();
-        $data = [
-            'post_id' => $request->post_id,
-            'author' => $user->name,
-            'email' => $user->email,
-            'photo' => $user->photo->file,
-            'body' => $request->body
-        ];
-
-        Comment::create($data);
-
-        $request->session()->flash('comment', 'Your comment has been saved & is wating moderation!');
-
-        return back();
+        //
     }
 
     /**
@@ -65,8 +52,7 @@ class PostCommentController extends Controller
      */
     public function show($id)
     {
-        return view('admin.comments.show',
-    ['comments' => Post::findOrFail($id)->comments]);
+        //
     }
 
     /**
@@ -89,8 +75,7 @@ class PostCommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Comment::findOrFail($id)->update(['is_active' => $request->is_active]);
-        return back();
+        //
     }
 
     /**
@@ -101,7 +86,6 @@ class PostCommentController extends Controller
      */
     public function destroy($id)
     {
-        Comment::findOrFail($id)->delete();
-        return back();
+        //
     }
 }
