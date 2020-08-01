@@ -22,7 +22,13 @@ class AdminPostController extends Controller
     {
         return view('admin.posts.index', ['posts' => Post::all()]);
     }
+public function post($id)
+{
+    $post = Post::findOrFail($id);
+    $comments = $post->comments()->whereIsActive(1)->get();
 
+    return view('post', compact('post','comments'));
+}
     /**
      * Show the form for creating a new resource.
      *
@@ -48,7 +54,7 @@ class AdminPostController extends Controller
         if($file = $request->file('photo_id')){
 
             $name = time() . $file->getClientOriginalName();
-            $file->move('imgs/posts', $name);
+            $file->move('imgs', $name);
 
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
@@ -97,7 +103,7 @@ class AdminPostController extends Controller
 
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
-            $file->move('imgs/posts', $name);
+            $file->move('imgs', $name);
             $photo = Photo::create(['file'=>$name]);
 
             $input['photo_id'] = $photo->id;

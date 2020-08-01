@@ -28,6 +28,8 @@
                                     <th scope="col">Photo</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Body</th>
+                                    <th scope="col">View Post</th>
+                                    <th scope="col">Comments</th>
                                     <th scope="col">Creat At</th>
                                     <th scope="col">Update At</th>
                                     <th scope="col">Actions</th>
@@ -42,11 +44,13 @@
                                     <td> {{$p->user ? $p->user->name : 'Not owner'}}</td>
                                     <td>{{$p->category ? $p->category->name : 'Not categorized'}}</td>
                                     <th><img height="45"
-                                            src="{{$p->photo ? $p->photo->file : 'http://placehold.it/400x400'}}"
+                                            src="{{$p->photo ? asset($p->photo->file) : 'http://placehold.it/400x400'}}"
                                             alt="IMG">
                                     </th>
                                     <td><a href="{{route('admin.posts.edit', $p)}}">{{$p->title}} </a></td>
                                     <td> {{str_limit($p->body, 10)}}</td>
+                                    <td><a href="{{route('home.post', $p->id)}}">View Post</a></td>
+                                    <td><a href="{{route('admin.comments.show', $p->id)}}">View Comments</a></td>
                                     <td> {{$p->created_at->diffForHumans()}}</td>
                                     <td> {{$p->updated_at->diffForHumans()}}</td>
                                     <td>
