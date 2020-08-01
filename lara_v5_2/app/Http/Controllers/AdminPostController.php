@@ -20,11 +20,13 @@ class AdminPostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index', ['posts' => Post::all()]);
+        return view('admin.posts.index', ['posts' => Post::paginate(2)]);
     }
-public function post($id)
+public function post($slug)
 {
-    $post = Post::findOrFail($id);
+    //dd(Post::where('slug',$slug)->get());
+    //$post = Post::findBySlugOrFail($slug); is not work in my case
+    $post = Post::where('slug',$slug)->first();
     $comments = $post->comments()->whereIsActive(1)->get();
 
     return view('post', compact('post','comments'));

@@ -49,7 +49,7 @@
                                     </th>
                                     <td><a href="{{route('admin.posts.edit', $p)}}">{{$p->title}} </a></td>
                                     <td> {{str_limit($p->body, 10)}}</td>
-                                    <td><a href="{{route('home.post', $p->id)}}">View Post</a></td>
+                                    <td><a href="{{route('home.post', $p->slug)}}">View Post</a></td>
                                     <td><a href="{{route('admin.comments.show', $p->id)}}">View Comments</a></td>
                                     <td> {{$p->created_at->diffForHumans()}}</td>
                                     <td> {{$p->updated_at->diffForHumans()}}</td>
@@ -68,5 +68,9 @@
                         </table>
 
                     </div>
-
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-5">
+                            {{$posts->render()}}
+                        </div>
+                    </div>
 @endsection

@@ -64,12 +64,13 @@
 <!-- Posted Comments -->
 
 <!-- Comment -->
+
 @if (count($comments) >0)
 
 @foreach ($comments as $comment)
 <div class="media">
     <a class="pull-left" href="#">
-        <img height="64" width="64" class="media-object" src="{{asset($comment->photo)}}" alt="">
+        <img height="64" width="64" class="media-object" src="{{Auth::user()->gravatar}}" alt="">
     </a>
     <div class="media-body">
         <h4 class="media-heading">{{$comment->author}}

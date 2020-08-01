@@ -27,7 +27,7 @@ Route::get('admin', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-Route::get('post/{id}',['as' => 'home.post', 'uses' => 'AdminPostController@post']);
+Route::get('post/{slug}',['as' => 'home.post', 'uses' => 'AdminPostController@post']);
 
 
 Route::group(['middleware' => 'admin'], function () {
