@@ -1,10 +1,5 @@
-#admin-page {
-  padding-top: 0px; }
+body {
+  background: rgba(255, 166, 0, 0.657);
+}
 
-#nested-comment {
-  margin-top: 60px; }
-
-.comment-reply {
-  display: none; }
-
-/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRDpcXGxhcmF2ZWxfcHJveWVjdG9zXFxjdXJzb1xcbGFyYV92NV8yXFxyZXNvdXJjZXNcXGFzc2V0c1xcc2Fzc1xcYXBwLnNjc3MiLCJzb3VyY2VzIjpbIi9sYXJhdmVsX3Byb3llY3Rvcy9jdXJzby9sYXJhX3Y1XzIvcmVzb3VyY2VzL2Fzc2V0cy9zYXNzL2FwcC5zY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIEBpbXBvcnQgXCJub2RlX21vZHVsZXMvYm9vdHN0cmFwLXNhc3MvYXNzZXRzL3N0eWxlc2hlZXRzL2Jvb3RzdHJhcFwiO1xuXG5ib2R5e1xuICAgIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAxNjYsIDAsIDAuNjU3KTtcbn1cbiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSxBQUFBLElBQUksQ0FBQTtFQUNBLFVBQVUsRUFBRSx3QkFBd0I7Q0FDdkMifQ== */
