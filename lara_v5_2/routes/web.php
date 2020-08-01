@@ -61,6 +61,7 @@ Route::group(['middleware' => 'admin'], function () {
         'store'=>'admin.midia.store',
         'edit'=>'admin.midia.edit'
     ]]);
+    Route::delete('/delete/media', 'AdminMediaController@deleteMedia');
     //Route::get('admin/media/upload', ['as' => 'admin.media.upload'],'AdminCategoryController@');
 
     //

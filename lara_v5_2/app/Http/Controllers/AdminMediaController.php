@@ -16,7 +16,7 @@ class AdminMediaController extends Controller
      */
     public function index()
     {
-        return view('admin.media.index',['photos' => Photo::all()]);
+        return view('admin.media.index', ['photos' => Photo::all()]);
     }
 
     /**
@@ -38,11 +38,10 @@ class AdminMediaController extends Controller
     public function store(Request $request)
     {
         $file = $request->file('file');
-        $nameFile = time().$file->getClientOriginalName();
+        $nameFile = time() . $file->getClientOriginalName();
         $file->move('imgs', $nameFile);
 
         Photo::create(['file' => $nameFile]);
-
     }
 
     /**
@@ -88,9 +87,26 @@ class AdminMediaController extends Controller
     public function destroy($id)
     {
         $photo = Photo::findOrFail($id);
-            unlink(public_path(trim($photo->file)));
-            $photo->delete();
+        unlink(public_path(trim($photo->file)));
+        $photo->delete();
 
-            return redirect('/admin/media');
+        return redirect('/admin/media');
+    }
+
+    public function deleteMedia(Request $r)
+    {
+        if (isset($r->delete_one)) {
+            $this->destroy($r->photo);
+            return back();
+        }else{
+           return back();
+        }
+        if (isset($r->delete_all)) {
+            $photo = Photo::findOrFail($r->checkBoxArray);
+            foreach ($photo as $p) {
+                $p->delete();
+            }
+            return back();
+        }
     }
 }
